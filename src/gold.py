@@ -118,8 +118,8 @@ def create_customer_ltv():
                 ROUND(CAST(SUM(o.total_usd) AS numeric), 2) AS total_spent,
                 ROUND(CAST(AVG(o.total_usd) AS numeric), 2) AS avg_order_value,
                 MIN(o.order_date) AS first_order_date,
-                MAo.order_date) AS last_order_date,
-                EXTRACT(DAY FROM MAo.order_date) - MIN(o.order_date))::int AS days_as_customer
+                MAX(o.order_date) AS last_order_date,
+                EXTRACT(DAY FROM MAX(o.order_date) - MIN(o.order_date))::int AS days_as_customer
             FROM {SILVER_SCHEMA}.dim_users u
             INNER JOIN {SILVER_SCHEMA}.fct_orders o ON u.user_id = o.user_id
             WHERE o.status NOT IN ('cancelled', 'chargeback')
