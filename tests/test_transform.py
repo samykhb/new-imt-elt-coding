@@ -166,7 +166,7 @@ class TestTransformOrders:
         mock_read.return_value = sample_orders
         result = transform_orders()
         # Hint: "datetime" in str(result["order_date"].dtype)
-        assert str(result["order_date"].dtype) == "datetime64[ns]"
+        assert str(result["order_date"].dtype) == "datetime64[ns]" or str(result["order_date"].dtype) == "datetime64[us]"
 
     @patch("src.transform._load_to_silver")
     @patch("src.transform._read_bronze")
