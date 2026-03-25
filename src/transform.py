@@ -7,9 +7,9 @@ from sqlalchemy import text
 
 from src.database import get_engine, BRONZE_SCHEMA, SILVER_SCHEMA
 
-# TODO (TP3): Import your logger and create a module-level logger
-#   1. from src.logger import get_logger
-#   2. logger = get_logger(__name__)
+
+from src.logger import get_logger
+logger = get_logger(__name__)
 
 
 def _read_bronze(table_name: str) -> pd.DataFrame:
