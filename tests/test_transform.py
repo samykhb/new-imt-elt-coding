@@ -44,6 +44,7 @@ from src.transform import (
     transform_products,
     transform_users,
     transform_orders,
+    transform_order_line_items
 )
 
 
@@ -176,6 +177,26 @@ class TestTransformOrders:
         mock_read.return_value = sample_orders
         result = transform_orders()
         assert result["coupon_code"].notna().all()
+
+# We add tests for the order_line_items table
+class TestTransformOrdersLineItems:
+    """Tests for transform_order_line_items()."""
+
+    @patch("src.transform._load_to_silver")
+    @patch("src.transform._read_bronze")
+    def test_positive_quantity(self, mock_read, mock_load, sample_order_line_items):
+        mock_read.return_value = sample_order_line_items
+        result = transform_order_line_items()
+        for quantity in result["quantity"]:
+            assert quantity > 0
+    
+    
+    @patch("src.transform._load_to_silver")
+    @patch("src.transform._read_bronze")
+    def test_line_id_not_null(self, mock_read, mock_load, sample_order_line_items):
+        mock_read.return_value = sample_order_line_items
+        result = transform_order_line_items()
+        assert result['line_item_id'].notna().all()
 
 
 # =============================================================================

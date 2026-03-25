@@ -64,3 +64,31 @@ def sample_orders():
         "_stripe_charge_id": ["ch_1", "ch_2", "ch_3"],
         "_fraud_score": [0.1, 0.2, 0.9],
     })
+
+@pytest.fixture
+def sample_order_line_items():
+    """Fake order line items DataFrame mimicking Bronze warehouse/sales data."""
+    return pd.DataFrame({
+        "line_item_id": ["LI-00000001", "LI-00000002", "LI-00000003", "LI-00000004", "LI-00000005"],
+        "order_id": ["ORD-100001", "ORD-100001", "ORD-100002", "ORD-100002", "ORD-100003"],
+        "product_id": ["KE-10039", "KE-10212", "KE-10202", "KE-10138", "KE-10172"],
+        "product_name": [
+            "Nike Cortez Lucky Green",
+            "Nike Heritage Waist Bag",
+            "Puma Essentials Big Logo Hoodie",
+            "Jordan Air Jordan 4 SE",
+            "New Balance M1000 Chicago"
+        ],
+        "brand": ["Nike", "Nike", "Puma", "Jordan", "New Balance"],
+        "category": ["sneakers", "accessories", "hoodies", "sneakers", "sneakers"],
+        "sku": ["KE-10039", "KE-10212", "KE-10202", "KE-10138", "KE-10172"],
+        "selected_size": ["36", "ONE SIZE", "XXL", "40.5", "41"],
+        "colorway": ["Lucky Green", "Grey", "Light Bone/Olive", "Burgundy Crush", "Chicago"],
+        "quantity": [-1, 1, 0, 4, 1],
+        "unit_price_usd": [-100.45, 25.00, 61.59, 235.47, 204.43],
+        "line_total_usd": [-100.45, 25.00, 61.59, 235.47, 204.43],
+        "weight_grams": [749, 177, 182, 1066, 557],
+        "_warehouse_id": ["WH-BRU", "WH-BRU", "WH-BRU", "WH-PAR", "WH-BRU"],
+        "_internal_batch_code": ["BATCH-17251", "BATCH-87826", "BATCH-53887", "BATCH-31079", "BATCH-53588"],
+        "_pick_slot": ["SLOT-C28", "SLOT-F06", "SLOT-F07", "SLOT-D02", "SLOT-B90"]
+    })
