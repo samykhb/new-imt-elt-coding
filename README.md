@@ -88,6 +88,6 @@ open htmlcov/index.html
 - **PostgreSQL** (AWS RDS) : Database
 - **pytest** : Testing (TP3)
 
-## 6. Team Members
+## 7. Team Members
 
 KHATIB Mohamed-Taib, KHEBBEB Samy, MÉNARD PESCATORE Raphaël
